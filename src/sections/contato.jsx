@@ -175,10 +175,10 @@ export default function Contato() {
                         }`}
                 >
                     <h2 className="text-balance font-display text-4xl leading-[1.1]">
-                        Agende sua <span className="italic text-destaque">Avaliação</span>
+                        Agende sua <span className="italic text-destaque">avaliação</span>
                     </h2>
                     <p className="mb-8 mt-2 text-sm text-texto/70">
-                        Preencha em menos de um minuto. A conversa continua no whatsapp
+                        Preencha em menos de um minuto. A conversa continua no WhatsApp.
                     </p>
 
                     <form onSubmit={enviar} noValidate className="flex flex-col" >
@@ -233,7 +233,7 @@ export default function Contato() {
                         {/* SERVIÇOS */}
                         <fieldset className="mt-6 flex min-w-0 flex-wrap gap-2">
                             <legend className="mb-2 p-0 text-[11px] font-medium uppercase tracking-[0.2em] text-texto/70">
-                                Qual Serviço deseja?
+                                Qual serviço deseja?
                             </legend>
                             {procedimentos.map((item) => (
                                 <label key={item.nome} className="relative cursor-pointer select-none">
