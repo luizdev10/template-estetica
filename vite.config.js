@@ -5,7 +5,7 @@ import { demo, clinica, seo, faq, contato, profissional } from './src/site.confi
 
 const BASE = '/template-estetica/'
 
-const json = (o) => JSON.stringify(o).replace(/</g, '\u003c')
+const json = (o) => JSON.stringify(o).replace(/</g, '\\u003c')
 const attr = (t) => t.replace(/&/g, '&amp;').replace(/"/g, '&quot;')
 
 const htmlDaConfiguracao = () => ({
