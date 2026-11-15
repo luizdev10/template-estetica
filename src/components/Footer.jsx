@@ -27,7 +27,7 @@ export default function Footer() {
                 </div>
 
                 <div className="flex min-w-0 flex-col gap-3">
-                    <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-fundo/55">
+                    <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-fundo/75">
                         Navegação
                     </p>
                     {menu.map((item, i) => (
@@ -38,7 +38,7 @@ export default function Footer() {
                 </div>
 
                 <div className="flex min-w-0 flex-col gap-3">
-                    <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-fundo/55">
+                    <p className="text-[11px] font-medium uppercase tracking-[0.15em] text-fundo/75">
                         Contato
                     </p>
                     <a
@@ -72,7 +72,7 @@ export default function Footer() {
                 <p>{rodape.aviso}</p>
             </div>
 
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-fundo/15 pt-6 text-[11px] text-fundo/55">
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-fundo/15 pt-6 text-[11px] text-fundo/75">
                 <p>© {new Date().getFullYear()} {clinica.nome}. Todos os direitos reservados.</p>
                 <a
                     href="#inicio"
