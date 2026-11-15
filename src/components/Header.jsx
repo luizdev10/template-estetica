@@ -6,9 +6,10 @@ export default function Header() {
     const [aberto, setAberto] = useState(false)
     const rolado = useScrollHeader()
 
-    const metade = Math.ceil(menu.length / 2)
-    const esquerda = menu.slice(0, metade)
-    const direita = menu.slice(metade)
+    const menuTopo = menu.filter((item) => !item.ocultoNoTopo)
+    const metade = Math.ceil(menuTopo.length / 2)
+    const esquerda = menuTopo.slice(0, metade)
+    const direita = menuTopo.slice(metade)
 
     useEffect(() => {
         if (!aberto) return
@@ -35,7 +36,7 @@ export default function Header() {
             <header
                 className={`fixed inset-x-0 ${demo.ativo && !rolado ? "top-7" : "top-0"} z-50 border-b transition-colors duration-500 motion-reduce:transition-none ${estilo}`}
             >
-                <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 lg:grid lg:h-20 lg:grid-cols-[1fr_auto_1fr] lg:px-8">
+                <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 lg:grid lg:h-20 lg:grid-cols-[1fr_auto_1fr] lg:gap-8 lg:px-8">
 
                     <nav className="hidden lg:block">
                         <ul className="flex items-center gap-6 xl:gap-8">

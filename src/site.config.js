@@ -103,7 +103,7 @@ export const menu = [
     { text: "Início", link: "#inicio" },
     { text: "Procedimentos", link: "#procedimentos" },
     { text: "Sobre", link: "#sobre" },
-    { text: "Dúvidas", link: "#faq" },
+    { text: "Dúvidas", link: "#faq", ocultoNoTopo: true },
     { text: "Localização", link: "#localizacao" },
     { text: "Contato", link: "#contato" },
 ]
