@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { ArrowUpRight, X } from "lucide-react"
-import { procedimentos, rotulos } from "../site.config.js"
+import { procedimentos, rotulos, avisoProcedimentos } from "../site.config.js"
 import Imagem from "../lib/imagem.jsx"
 import { useReveal } from "../hooks/useReveal.js"
 
@@ -11,21 +11,6 @@ export default function Procedimentos() {
 
     const destaque = procedimentos.find((p) => p.destaque) ?? procedimentos[procedimentos.length - 1]
     const resto = procedimentos.filter((p) => p !== destaque)
-
-    useEffect(() => {
-        if (!selecionado) return
-
-        const fechar = (e) => {
-            if (e.key === "Escape") setSelecionado(null)
-        }
-        document.addEventListener("keydown", fechar)
-        document.body.style.overflow = "hidden"
-
-        return () => {
-            document.removeEventListener("keydown", fechar)
-            document.body.style.overflow = ""
-        }
-    }, [selecionado])
 
     return (
         
@@ -89,50 +74,7 @@ export default function Procedimentos() {
 
 
             {selecionado && (
-                <div
-                    className="fixed inset-0 z-[60] flex items-center justify-center overflow-y-auto bg-black/60 p-4 py-8 opacity-100 transition-opacity duration-200 ease-out motion-reduce:transition-none starting:opacity-0"
-                    onClick={() => setSelecionado(null)}
-                >
-                    <div
-                        role="dialog"
-                        aria-modal="true"
-                        aria-labelledby="modal-titulo"
-                        className="relative w-full max-w-md scale-100 rounded-lg bg-fundo text-texto opacity-100 transition-all duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none starting:scale-95 starting:opacity-0"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <Imagem
-                            imagem={selecionado.imagem}
-                            alt={selecionado.alt}
-                            style={{ objectPosition: selecionado.posicao }}
-                            className="aspect-[3/2] w-full rounded-t-lg object-cover"
-                        />
-
-                        <div className="flex flex-col gap-3 rounded-b-lg p-6">
-                            <h3 id="modal-titulo" className="font-display text-4xl">
-                                {selecionado.nome}
-                            </h3>
-
-                            <p className="text-suave">{selecionado.descricao}</p>
-
-                            <a
-                                href="#agendar"
-                                onClick={() => setSelecionado(null)}
-                                className="mt-2 block rounded-full bg-destaque p-4 text-center text-fundo transition-all duration-200 ease-out hover:bg-destaque-escuro active:scale-[0.97]"
-                            >
-                                Agendar avaliação
-                            </a>
-                        </div>
-
-                        <button
-                            type="button"
-                            aria-label="Fechar"
-                            onClick={() => setSelecionado(null)}
-                            className="absolute right-3 top-3 rounded-full bg-black/40 p-2 text-fundo transition-transform duration-150 ease-out active:scale-90"
-                        >
-                            <X />
-                        </button>
-                    </div>
-                </div>
+                <ModalProcedimento item={selecionado} onFechar={() => setSelecionado(null)} />
             )}
         </section>
     )
@@ -143,14 +85,15 @@ function CardProcedimento({ item, destaque, visivel, atraso, idGrao, onClick }) 
         <button
             type="button"
             onClick={onClick}
+            aria-haspopup="dialog"
             style={visivel ? { transitionDelay: `${atraso}ms` } : undefined}
-            className={`group relative overflow-hidden rounded-lg transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none active:scale-[0.97] ${
+            className={`group relative overflow-hidden rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destaque focus-visible:ring-offset-2 focus-visible:ring-offset-borda transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none active:scale-[0.97] ${
                 destaque ? "aspect-[4/3] lg:aspect-auto lg:w-80 lg:shrink-0 xl:w-96" : "aspect-[3/4]"
             } ${visivel ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
         >
             <Imagem
                 imagem={item.imagem}
-                alt={item.alt}
+                alt=""
                 loading="lazy"
                 decoding="async"
                 style={{ objectPosition: item.posicao, animationDelay: visivel ? `${atraso}ms` : undefined }}
@@ -169,7 +112,7 @@ function CardProcedimento({ item, destaque, visivel, atraso, idGrao, onClick }) 
                 <rect width="100%" height="100%" filter={`url(#${idGrao})`} />
             </svg>
 
-            <ArrowUpRight className="absolute right-3 top-3 text-amarelo transition-transform duration-200 ease-out group-hover:rotate-45" />
+            <ArrowUpRight aria-hidden="true" className="absolute right-3 top-3 text-amarelo transition-transform duration-200 ease-out group-hover:rotate-45" />
 
             <div className="absolute inset-x-0 bottom-0">
                 {destaque && rotulos.maisProcurado && (
@@ -180,5 +123,69 @@ function CardProcedimento({ item, destaque, visivel, atraso, idGrao, onClick }) 
                 <p className="m-4 font-display text-xl text-fundo md:text-2xl">{item.nome}</p>
             </div>
         </button>
+    )
+}
+
+// Janela do procedimento. <dialog> nativo: Enter/Espaço no card abre, Esc fecha,
+// o foco fica preso dentro e volta ao card que abriu quando a janela fecha.
+function ModalProcedimento({ item, onFechar }) {
+    const ref = useRef(null)
+
+    useEffect(() => {
+        const d = ref.current
+        if (!d.open) d.showModal()
+        document.body.style.overflow = "hidden"
+        return () => {
+            document.body.style.overflow = ""
+            if (d.open) d.close()
+        }
+    }, [])
+
+    return (
+        <dialog
+            ref={ref}
+            aria-labelledby="modal-titulo"
+            aria-describedby="modal-detalhe"
+            onClose={onFechar}
+            onClick={(e) => e.target === ref.current && ref.current.close()}
+            className="m-auto w-[calc(100%-2rem)] max-w-md overflow-visible rounded-lg bg-fundo p-0 text-texto backdrop:bg-black/60"
+        >
+            <div className="relative max-h-[90dvh] overflow-y-auto rounded-lg">
+                <Imagem
+                    imagem={item.imagem}
+                    alt={item.alt}
+                    style={{ objectPosition: item.posicao }}
+                    className="aspect-[3/2] w-full object-cover"
+                />
+
+                <div className="flex flex-col gap-3 p-6">
+                    <h3 id="modal-titulo" className="font-display text-4xl">
+                        {item.nome}
+                    </h3>
+
+                    <p id="modal-detalhe" className="text-texto/80">
+                        {item.detalhe ?? item.descricao}
+                    </p>
+                    <p className="text-xs text-suave">{avisoProcedimentos}</p>
+
+                    <a
+                        href="#agendar"
+                        onClick={() => ref.current.close()}
+                        className="mt-2 block rounded-full bg-destaque p-4 text-center text-fundo transition-all duration-200 ease-out hover:bg-destaque-escuro active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destaque focus-visible:ring-offset-2"
+                    >
+                        Agendar avaliação
+                    </a>
+                </div>
+
+                <button
+                    type="button"
+                    aria-label="Fechar"
+                    onClick={() => ref.current.close()}
+                    className="absolute right-2 top-2 inline-flex h-11 w-11 items-center justify-center rounded-full bg-black/50 text-fundo transition-transform duration-150 ease-out active:scale-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amarelo"
+                >
+                    <X aria-hidden="true" />
+                </button>
+            </div>
+        </dialog>
     )
 }
