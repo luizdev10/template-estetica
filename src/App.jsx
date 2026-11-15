@@ -6,6 +6,7 @@ import Seo from "./components/Seo.jsx";
 import Home from "./sections/home.jsx";
 import Proced from "./sections/Procedimentos.jsx";
 import Sobre from "./sections/Sobre.jsx";
+import Faq from "./sections/Faq.jsx";
 import Localizacao from "./sections/Localizacao.jsx";
 import Contato from "./sections/contato.jsx";
 function App() {
@@ -17,6 +18,7 @@ function App() {
     <Home />
     <Proced />
     <Sobre />
+    <Faq />
     <Localizacao />
     <Contato />
     <Footer />

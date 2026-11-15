@@ -140,6 +140,7 @@ export const menu = [
     { text: "Início", link: "#inicio" },
     { text: "Procedimentos", link: "#procedimentos" },
     { text: "Sobre", link: "#sobre" },
+    { text: "Dúvidas", link: "#faq" },
     { text: "Localização", link: "#localizacao" },
     { text: "Contato", link: "#contato" },
 ]
@@ -233,7 +234,7 @@ export const faq = {
         {
             pergunta: "Quanto tempo dura o atendimento?",
             resposta:
-                "A duração varia conforme o caso. Informe o tempo estimado na hora do agendamento. TODO: preencher pelo responsável.",
+                "A duração varia conforme o caso. O tempo estimado é informado na hora do agendamento.", // TODO: confirmar com o responsável
         },
         {
             pergunta: "O que devo levar?",
