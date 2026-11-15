@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { clinica, contato } from "../config/site.js";
+import { clinica, contato } from "../site.config.js";
 
 export default function Seo() {
     useEffect(() => {

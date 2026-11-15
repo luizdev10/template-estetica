@@ -1,4 +1,4 @@
-import { contato } from "../config/site.js"
+import { contato } from "../site.config.js"
 import { useReveal } from "../hooks/useReveal.js"
 
 export default function Localizacao() {
@@ -32,7 +32,7 @@ export default function Localizacao() {
                     </div>
 
                     <a
-                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contato.endereco)}`}
+                        href={contato.mapaLink || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contato.endereco)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="mt-2 inline-block self-start rounded-full bg-destaque px-8 py-4 text-xs uppercase tracking-[0.2em] text-fundo transition-all duration-200 ease-out hover:bg-destaque-escuro active:scale-[0.97]"

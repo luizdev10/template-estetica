@@ -1,4 +1,5 @@
-import fotomb from "../assets/images/fundoinimb.webp"
+import { hero, imagens } from "../site.config.js"
+import Imagem from "../lib/imagem.jsx"
 import { useReveal } from "../hooks/useReveal.js"
 
 export default function Home() {
@@ -6,8 +7,8 @@ export default function Home() {
 
     return (
         <section id="inicio" className="relative h-dvh w-full overflow-hidden ">
-            <img
-                src={fotomb}
+            <Imagem
+                imagem={imagens.hero}
                 alt=""
                 fetchPriority="high"
                 decoding="async"
@@ -30,18 +31,18 @@ export default function Home() {
                     }`}
                 >
                     <p className="mb-3 font-sans text-[11px] uppercase tracking-[0.2em] lg:text-sm lg:tracking-[0.25em]">
-                        Harmonização facial &amp; estética avançada
+                        {hero.sobretitulo}
                     </p>
 
                     <h1 className="font-display text-5xl leading-[1.05] sm:text-6xl lg:text-7xl xl:text-8xl">
-                        A arte de
+                        {hero.tituloInicio}{" "}
                         <em className="block ml-6 text-foto-claro underline decoration-amarelo decoration-4 underline-offset-8 sm:ml-12 lg:ml-16 lg:decoration-[6px] lg:underline-offset-[14px]">
-                            ser você.
+                            {hero.tituloDestaque}
                         </em>
                     </h1>
 
                     <p className="max-w-md pt-5 lg:max-w-lg lg:pt-7 lg:text-lg xl:text-xl">
-                        Avaliação individual e procedimentos feitos para realçar o que já é seu.
+                        {hero.texto}
                     </p>
                 </div>
 
@@ -54,7 +55,7 @@ export default function Home() {
                         href="#agendar"
                         className="inline-flex w-full items-center justify-center rounded-full bg-amarelo px-10 py-5 text-center text-destaque-escuro transition-transform active:scale-[0.98] sm:w-auto lg:px-14 lg:py-6 lg:text-lg"
                     >
-                        AGENDAR AVALIAÇÃO
+                        {hero.botao.toUpperCase()}
                     </a>
                 </div>
             </div>

@@ -1,4 +1,5 @@
-import { profissional } from "../config/site.js"
+import { profissional } from "../site.config.js"
+import Imagem from "../lib/imagem.jsx"
 import { useReveal } from "../hooks/useReveal.js"
 
 export default function Sobre() {
@@ -12,8 +13,8 @@ export default function Sobre() {
             >
 
                 <div className="relative aspect-[4/5] w-full overflow-hidden rounded-t-full">
-                    <img
-                        src={profissional.foto}
+                    <Imagem
+                        imagem={profissional.imagem}
                         alt={profissional.alt}
                         loading="lazy"
                         decoding="async"
@@ -48,7 +49,7 @@ export default function Sobre() {
                         }`}
                     >
                         <p className="mb-1 text-[11px] font-medium uppercase tracking-[0.2em] text-destaque">
-                            {[profissional.registro, profissional.area].filter(Boolean).join(" · ")}
+                            {[profissional.registro.numero && `${profissional.registro.conselho} ${profissional.registro.numero}`, profissional.area].filter(Boolean).join(" · ")}
                         </p>
                         <h2 className="font-display text-4xl leading-[1.05] md:text-5xl">{profissional.nome}</h2>
                         <p className="mt-3 max-w-md text-sm leading-relaxed text-texto/80 sm:text-base">{profissional.bio}</p>

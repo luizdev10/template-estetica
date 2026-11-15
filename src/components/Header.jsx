@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { menu, clinica } from "../config/site.js"
+import { menu, clinica } from "../site.config.js"
 import { useScrollHeader } from "../hooks/useScrollHeader.js"
 
 export default function Header() {

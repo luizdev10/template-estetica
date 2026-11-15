@@ -1,9 +1,8 @@
-import { contato, procedimentos } from "../config/site";
+import { contato, procedimentos, imagens } from "../site.config.js";
+import Imagem from "../lib/imagem.jsx";
 import { useState } from "react";
 import { useReveal } from "../hooks/useReveal.js";
 import { AlertCircle } from "lucide-react";
-import avaliacaoForm from "../assets/images/avaliacao-form.webp";
-import contatoDestaque from "../assets/images/contato-destaque.webp";
 
 
 // Mantém só dígitos (até 11) e aplica a máscara (DD) 9XXXX-XXXX
@@ -153,9 +152,9 @@ export default function Contato() {
                     </div>
                 </div>
 
-                <img
-                    src={contatoDestaque}
-                    alt="Close do rosto de uma mulher, com a pele iluminada por luz natural"
+                <Imagem
+                    imagem={imagens.contatoDestaque}
+                    alt={imagens.contatoDestaque.alt}
                     loading="lazy"
                     className="hidden rounded-2xl object-cover lg:block lg:w-72 lg:shrink-0 xl:w-80"
                 />
@@ -163,9 +162,9 @@ export default function Contato() {
 
             {/* FORMULÁRIO */}
             <div id="agendar" className="mt-5 flex flex-col gap-6 scroll-mt-28 lg:flex-row lg:items-start">
-                <img
-                    src={avaliacaoForm}
-                    alt="Sala de espera em tons neutros, com poltrona, cortina translúcida e planta, criando um ambiente calmo"
+                <Imagem
+                    imagem={imagens.avaliacaoForm}
+                    alt={imagens.avaliacaoForm.alt}
                     loading="lazy"
                     className="hidden rounded-2xl object-cover lg:sticky lg:top-24 lg:block lg:aspect-[3/4] lg:w-72 lg:shrink-0 xl:w-80"
                 />

@@ -1,4 +1,4 @@
-import { clinica, contato, menu, profissional } from "../config/site.js";
+import { clinica, contato, menu, profissional } from "../site.config.js";
 
 export default function Footer() {
     const link =

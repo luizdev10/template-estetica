@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { ArrowUpRight, X } from "lucide-react"
-import { procedimentos } from "../config/site.js"
+import { procedimentos, rotulos } from "../site.config.js"
+import Imagem from "../lib/imagem.jsx"
 import { useReveal } from "../hooks/useReveal.js"
 
 export default function Procedimentos() {
@@ -8,8 +9,8 @@ export default function Procedimentos() {
     const [refTitulo, tituloVisivel] = useReveal({ threshold: 0.1 })
     const [refGrade, visivel] = useReveal({ threshold: 0.1 })
 
-    const destaque = procedimentos[procedimentos.length - 1]
-    const resto = procedimentos.slice(0, -1)
+    const destaque = procedimentos.find((p) => p.destaque) ?? procedimentos[procedimentos.length - 1]
+    const resto = procedimentos.filter((p) => p !== destaque)
 
     useEffect(() => {
         if (!selecionado) return
@@ -99,8 +100,8 @@ export default function Procedimentos() {
                         className="relative w-full max-w-md scale-100 rounded-lg bg-fundo text-texto opacity-100 transition-all duration-[220ms] ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none starting:scale-95 starting:opacity-0"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <img
-                            src={selecionado.imagem}
+                        <Imagem
+                            imagem={selecionado.imagem}
                             alt={selecionado.alt}
                             style={{ objectPosition: selecionado.posicao }}
                             className="aspect-[3/2] w-full rounded-t-lg object-cover"
@@ -147,8 +148,8 @@ function CardProcedimento({ item, destaque, visivel, atraso, idGrao, onClick }) 
                 destaque ? "aspect-[4/3] lg:aspect-auto lg:w-80 lg:shrink-0 xl:w-96" : "aspect-[3/4]"
             } ${visivel ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
         >
-            <img
-                src={item.imagem}
+            <Imagem
+                imagem={item.imagem}
                 alt={item.alt}
                 loading="lazy"
                 decoding="async"
@@ -171,9 +172,9 @@ function CardProcedimento({ item, destaque, visivel, atraso, idGrao, onClick }) 
             <ArrowUpRight className="absolute right-3 top-3 text-amarelo transition-transform duration-200 ease-out group-hover:rotate-45" />
 
             <div className="absolute inset-x-0 bottom-0">
-                {destaque && (
+                {destaque && rotulos.maisProcurado && (
                     <p className="mx-4 mt-4 text-[10px] font-medium uppercase tracking-[0.2em] text-amarelo">
-                        Mais procurado
+                        {rotulos.maisProcurado}
                     </p>
                 )}
                 <p className="m-4 font-display text-xl text-fundo md:text-2xl">{item.nome}</p>

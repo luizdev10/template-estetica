@@ -1,4 +1,4 @@
-import { contato } from "../config/site.js";
+import { contato } from "../site.config.js";
 
 export default function BotaoWhatsapp({ texto, className, children, ...resto }) {
     return (
