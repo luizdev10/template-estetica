@@ -1,4 +1,4 @@
-import { clinica, contato, menu, profissional } from "../site.config.js";
+import { clinica, contato, menu, profissional, rodape } from "../site.config.js";
 
 export default function Footer() {
     const link =
@@ -63,7 +63,19 @@ export default function Footer() {
                 </div>
             </div>
 
-            <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-fundo/15 pt-6 text-[11px] text-fundo/55">
+            {/* ATENÇÃO: a publicidade de procedimentos de saúde tem regras do conselho
+                profissional (CFM, CFO, CFBM, COFFITO...). Conferir textos, fotos e
+                rótulos (ex.: "Mais procurado") antes de publicar para o público. */}
+            <div className="mt-12 flex flex-col gap-2 border-t border-fundo/15 pt-6 text-xs leading-relaxed text-fundo/70">
+                {profissional.registro.numero && (
+                    <p>
+                        {profissional.nome} · {profissional.registro.conselho} {profissional.registro.numero}
+                    </p>
+                )}
+                <p>{rodape.aviso}</p>
+            </div>
+
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-fundo/15 pt-6 text-[11px] text-fundo/55">
                 <p>© {new Date().getFullYear()} {clinica.nome}. Todos os direitos reservados.</p>
                 <a
                     href="#inicio"

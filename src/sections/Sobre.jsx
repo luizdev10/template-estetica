@@ -4,6 +4,8 @@ import { useReveal } from "../hooks/useReveal.js"
 
 export default function Sobre() {
     const [ref, visivel] = useReveal({ threshold: 0.1 })
+    const { conselho, numero } = profissional.registro
+    const registro = numero ? `${conselho} ${numero}` : ""
 
     return (
         <section id="sobre" className="scroll-mt-28 bg-fundo pb-20 pt-16">
@@ -41,6 +43,12 @@ export default function Sobre() {
                                 <p className="text-xs text-suave">{item.valor}</p>
                             </div>
                         ))}
+                        {registro && (
+                            <div>
+                                <p className="font-display text-xl">Registro profissional</p>
+                                <p className="text-xs text-suave">{registro}</p>
+                            </div>
+                        )}
                     </div>
 
                     <div
@@ -49,7 +57,7 @@ export default function Sobre() {
                         }`}
                     >
                         <p className="mb-1 text-[11px] font-medium uppercase tracking-[0.2em] text-destaque">
-                            {[profissional.registro.numero && `${profissional.registro.conselho} ${profissional.registro.numero}`, profissional.area].filter(Boolean).join(" · ")}
+                            {[profissional.area].filter(Boolean).join(" · ")}
                         </p>
                         <h2 className="font-display text-4xl leading-[1.05] md:text-5xl">{profissional.nome}</h2>
                         <p className="mt-3 max-w-md text-sm leading-relaxed text-texto/80 sm:text-base">{profissional.bio}</p>
