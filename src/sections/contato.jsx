@@ -1,8 +1,9 @@
 import { contato, procedimentos, imagens, demo } from "../site.config.js";
 import Imagem from "../lib/imagem.jsx";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useReveal } from "../hooks/useReveal.js";
 import { AlertCircle } from "lucide-react";
+import PoliticaPrivacidade from "../components/PoliticaPrivacidade.jsx";
 
 
 // Mantém só dígitos (até 11) e aplica a máscara (DD) 9XXXX-XXXX
@@ -30,6 +31,9 @@ export default function Contato() {
     const [telefone, setTelefone] = useState("");
 
     const [erroForm, setErrorForm] = useState({})
+    const [privacidadeAberta, setPrivacidadeAberta] = useState(false)
+    const refNome = useRef(null)
+    const refTelefone = useRef(null)
 
     
 
@@ -51,14 +55,18 @@ export default function Contato() {
 
         setErrorForm(aviso)
 
-        if (Object.keys(aviso).length > 0 ) return
+        if (Object.keys(aviso).length > 0) {
+            // leva o foco ao primeiro campo com erro
+            ;(aviso.nome ? refNome : refTelefone).current?.focus()
+            return
+        }
 
         const texto = [
             "Olá, tudo bem? Gostaria de agendar uma avaliação.",
             "",
             `Nome: ${name.trim()}`,
-            `WhatsApp: ${numero}`,
-            `Procedimento: ${proced.join(", ")}`,
+            `WhatsApp: ${telefone}`,
+            `Serviços de interesse: ${proced.length ? proced.join(", ") : "Ainda não sei"}`,
             `Melhor período: ${periodo}`,
             "",
             "Teriam disponibilidade para esse período?",
@@ -181,15 +189,28 @@ export default function Contato() {
                         Preencha em menos de um minuto. A conversa continua no WhatsApp.
                     </p>
 
+                    <p className="mb-5 text-xs text-texto/70">
+                        Campos marcados com <span aria-hidden="true" className="text-destaque">*</span>
+                        <span className="sr-only">asterisco</span> são obrigatórios.
+                    </p>
+
                     <form onSubmit={enviar} noValidate className="flex flex-col" >
                         <label
-                            htmlFor=""
+                            htmlFor="campo-nome"
                             className="mb-2 text-[11px] font-medium uppercase tracking-[0.2em] text-texto/70"
                         >
-                            SEU NOME
+                            Seu nome <span aria-hidden="true" className="text-destaque">*</span>
                         </label>
                         <input
-                            type="text"                        
+                            id="campo-nome"
+                            ref={refNome}
+                            type="text"
+                            name="nome"
+                            autoComplete="name"
+                            required
+                            aria-required="true"
+                            aria-invalid={Boolean(erroForm.nome)}
+                            aria-describedby={erroForm.nome ? "erro-nome" : undefined}
                             value={name}
                             onChange={(e) => {
                                 setName(e.target.value)
@@ -200,19 +221,26 @@ export default function Contato() {
                             className="min-h-12 w-full rounded-lg bg-fundo px-4 py-3 text-base text-texto caret-destaque outline-none transition-shadow duration-200 placeholder:text-suave focus:ring-2 focus:ring-destaque motion-reduce:transition-none"
                         />
                       {erroForm.nome && (
-                          <p className="mt-1.5 flex animate-erro items-center gap-1.5 text-xs font-medium text-destaque motion-reduce:animate-none">
+                          <p id="erro-nome" role="alert" className="mt-1.5 flex animate-erro items-center gap-1.5 text-xs font-medium text-destaque motion-reduce:animate-none">
                               <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                               {erroForm.nome}
                           </p>
                       )}
 
                         <label
-                            htmlFor=""
+                            htmlFor="campo-telefone"
                             className="mb-2 mt-5 text-[11px] font-medium uppercase tracking-[0.2em] text-texto/70"
                         >
-                            SEU WHATSAPP
+                            Seu WhatsApp <span aria-hidden="true" className="text-destaque">*</span>
                         </label>
                         <input
+                            id="campo-telefone"
+                            ref={refTelefone}
+                            name="telefone"
+                            required
+                            aria-required="true"
+                            aria-invalid={Boolean(erroForm.telefone)}
+                            aria-describedby={erroForm.telefone ? "erro-telefone" : undefined}
                             type="tel"
                             inputMode="tel"
                             autoComplete="tel"
@@ -225,7 +253,7 @@ export default function Contato() {
                             className="min-h-12 w-full rounded-lg bg-fundo px-4 py-3 text-base text-texto caret-destaque outline-none transition-shadow duration-200 placeholder:text-suave focus:ring-2 focus:ring-destaque motion-reduce:transition-none"
                         />
                             {erroForm.telefone && (
-                                <p className="mt-1.5 flex animate-erro items-center gap-1.5 text-xs font-medium text-destaque motion-reduce:animate-none">
+                                <p id="erro-telefone" role="alert" className="mt-1.5 flex animate-erro items-center gap-1.5 text-xs font-medium text-destaque motion-reduce:animate-none">
                                     <AlertCircle className="h-3.5 w-3.5 shrink-0" />
                                     {erroForm.telefone}
                                 </p>
@@ -285,8 +313,23 @@ export default function Contato() {
                             Enviar
                         </button>
                     </form>
+
+                    <p className="mt-4 text-xs leading-relaxed text-texto/70">
+                        Ao enviar, você concorda que seus dados sejam usados apenas para responder
+                        ao seu pedido de avaliação. Nada é enviado a servidores deste site: a
+                        mensagem é aberta no seu WhatsApp. Leia a{" "}
+                        <button
+                            type="button"
+                            onClick={() => setPrivacidadeAberta(true)}
+                            className="underline underline-offset-2 hover:text-destaque focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-destaque"
+                        >
+                            política de privacidade
+                        </button>
+                        .
+                    </p>
                 </div>
             </div>
+            <PoliticaPrivacidade aberto={privacidadeAberta} onFechar={() => setPrivacidadeAberta(false)} />
         </section>
     )
 }   
