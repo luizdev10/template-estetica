@@ -6,12 +6,10 @@ export default function Header() {
     const [aberto, setAberto] = useState(false)
     const rolado = useScrollHeader()
 
-    // divide o menu: metade à esquerda do logo, metade à direita
     const metade = Math.ceil(menu.length / 2)
     const esquerda = menu.slice(0, metade)
     const direita = menu.slice(metade)
 
-    // Esc fecha + trava a rolagem da página com o menu aberto
     useEffect(() => {
         if (!aberto) return
         const fechar = (e) => e.key === "Escape" && setAberto(false)
@@ -23,7 +21,6 @@ export default function Header() {
         }
     }, [aberto])
 
-    // visual do header: 3 estados
     const estilo = aberto
         ? "border-borda bg-fundo text-destaque"
         : rolado
@@ -39,7 +36,7 @@ export default function Header() {
                 className={`fixed inset-x-0 ${demo.ativo && !rolado ? "top-7" : "top-0"} z-50 border-b transition-colors duration-500 motion-reduce:transition-none ${estilo}`}
             >
                 <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 lg:grid lg:h-20 lg:grid-cols-[1fr_auto_1fr] lg:px-8">
-                    {/* esquerda (desktop) */}
+
                     <nav className="hidden lg:block">
                         <ul className="flex items-center gap-6 xl:gap-8">
                             {esquerda.map((item, i) => (
@@ -52,7 +49,6 @@ export default function Header() {
                         </ul>
                     </nav>
 
-                    {/* logo (centro no desktop) */}
                     <a
                         href="#inicio"
                         onClick={() => setAberto(false)}
@@ -62,7 +58,6 @@ export default function Header() {
                         <span className="text-amarelo">.</span>
                     </a>
 
-                    {/* direita (desktop) */}
                     <div className="hidden items-center justify-end gap-6 lg:flex xl:gap-8">
                         <ul className="flex items-center gap-6 xl:gap-8">
                             {direita.map((item, i) => (
@@ -81,7 +76,6 @@ export default function Header() {
                         </a>
                     </div>
 
-                    {/* botão MENU (celular/tablet) */}
                     <button
                         onClick={() => setAberto(!aberto)}
                         className="flex min-h-11 items-center font-sans text-xs uppercase tracking-[0.2em] underline decoration-amarelo decoration-2 underline-offset-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amarelo lg:hidden"
@@ -93,7 +87,6 @@ export default function Header() {
                 </div>
             </header>
 
-            {/* escurece a página atrás; tocar fora fecha o menu */}
             <div
                 onClick={() => setAberto(false)}
                 aria-hidden="true"
@@ -102,8 +95,6 @@ export default function Header() {
                 }`}
             />
 
-            {/* painel que desce do header (fora do <header> de propósito:
-                backdrop-blur no pai quebraria o "fixed") */}
             <nav
                 aria-hidden={!aberto}
                 className={`fixed inset-x-0 ${demo.ativo && !rolado ? "top-[calc(4rem+1.75rem)]" : "top-16"} z-40 border-b border-borda bg-fundo px-5 pb-6 pt-2 text-texto shadow-lg transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none lg:hidden ${

@@ -13,7 +13,7 @@ export default function Procedimentos() {
     const resto = procedimentos.filter((p) => p !== destaque)
 
     return (
-        
+
         <section id="procedimentos" className="scroll-mt-28 bg-borda pb-20 pt-16">
             <div
                 ref={refTitulo}
@@ -55,7 +55,6 @@ export default function Procedimentos() {
                 </div>
             </div>
 
-
             <div
                 className={`mx-6 mt-14 flex flex-col items-start gap-4 border-t border-texto/15 pt-8 transition-all delay-200 duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none md:mx-10 lg:mx-auto lg:max-w-5xl ${
                     visivel ? "translate-y-0 opacity-100 blur-none" : "translate-y-8 opacity-0 blur-sm"
@@ -71,7 +70,6 @@ export default function Procedimentos() {
                     Agendar avaliação
                 </a>
             </div>
-
 
             {selecionado && (
                 <ModalProcedimento item={selecionado} onFechar={() => setSelecionado(null)} />
@@ -125,8 +123,6 @@ function CardProcedimento({ item, destaque, visivel, atraso, idGrao, onClick }) 
     )
 }
 
-// Janela do procedimento. <dialog> nativo: Enter/Espaço no card abre, Esc fecha,
-// o foco fica preso dentro e volta ao card que abriu quando a janela fecha.
 function ModalProcedimento({ item, onFechar }) {
     const ref = useRef(null)
 

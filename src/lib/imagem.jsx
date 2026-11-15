@@ -1,6 +1,5 @@
-// Monta o <img> responsivo a partir de um objeto de imagem da configuração:
-// { arquivo, largura, altura }. As versões -480/-800/-1200/-1600 são geradas
-// por `npm run imagens`. Largura e altura evitam salto de layout.
+
+
 export const caminho = (relativo) => `${import.meta.env.BASE_URL}${relativo}`
 
 const LARGURAS = [480, 800, 1200, 1600]

@@ -1,22 +1,17 @@
 @theme {
 
-  --color-fundo: #F5F1EC;          /* fundo calmo, bege neutro */
-  --color-texto: #2B1E1E;          /* texto corrido, marrom bem escuro */
-  --color-suave: #6B5C5A;          /* texto secundário (rodapé) */
-  --color-borda: #DED4CC;          /* linha divisória */
- /* --color-destaque: #8B1A1A;*/       /* vermelho fechado: marca, frase, botão */
-  --color-destaque-escuro: #6B1313;/* hover do botão */
-  /*--color-amarelo: #F5C542; */       /* amarelo dourado: detalhes e hover */
-  --color-foto-claro: #D4C0B4;     /* topo do espaço da foto */
-  --color-foto-escuro: #A98D82;    /* base do espaço da foto */
+  --color-fundo: #F5F1EC;
+  --color-texto: #2B1E1E;
+  --color-suave: #6B5C5A;
+  --color-borda: #DED4CC;
+
+  --color-destaque-escuro: #6B1313;
+
+  --color-foto-claro: #D4C0B4;
+  --color-foto-escuro: #A98D82;
   --color-destaque: #7A1616;
 --color-amarelo: #E8B84A;
 
-
- 
-  
-
-  /* Fontes */
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-sans: "Hanken Grotesk", system-ui, sans-serif;
 }

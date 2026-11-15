@@ -63,9 +63,6 @@ export default function Footer() {
                 </div>
             </div>
 
-            {/* ATENÇÃO: a publicidade de procedimentos de saúde tem regras do conselho
-                profissional (CFM, CFO, CFBM, COFFITO...). Conferir textos, fotos e
-                rótulos (ex.: "Mais procurado") antes de publicar para o público. */}
             <div className="mt-12 flex flex-col gap-2 border-t border-fundo/15 pt-6 text-xs leading-relaxed text-fundo/70">
                 {profissional.registro.numero && (
                     <p>

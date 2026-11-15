@@ -1,6 +1,5 @@
 import { demo } from "../site.config.js"
 
-// Faixa discreta no topo, só aparece enquanto demo.ativo for true.
 export default function FaixaDemo() {
     if (!demo.ativo) return null
     return (

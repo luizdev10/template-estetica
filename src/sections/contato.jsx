@@ -5,8 +5,6 @@ import { useReveal } from "../hooks/useReveal.js";
 import { AlertCircle } from "lucide-react";
 import PoliticaPrivacidade from "../components/PoliticaPrivacidade.jsx";
 
-
-// Mantém só dígitos (até 11) e aplica a máscara (DD) 9XXXX-XXXX
 const formatarTelefone = (valor) => {
     const d = valor.replace(/\D/g, "").slice(0, 11)
     if (d.length <= 2) return d.length ? `(${d}` : ""
@@ -21,11 +19,9 @@ export default function Contato() {
     const [refContatos, visivelContatos] = useReveal({ threshold: 0.1 });
     const [refForm, visivelForm] = useReveal({ threshold: 0.1 });
 
-
     const [proced, setProced] = useState(["Avaliação facial"]);
     const alternarProc = (nome) => setProced((atual) => atual.includes(nome) ? atual.filter((p) => p !== nome) : [...atual, nome])
     const [periodo, setPeriodo] = useState("Qualquer horário");
-
 
     const [name, setName] = useState("");
     const [telefone, setTelefone] = useState("");
@@ -34,9 +30,6 @@ export default function Contato() {
     const [privacidadeAberta, setPrivacidadeAberta] = useState(false)
     const refNome = useRef(null)
     const refTelefone = useRef(null)
-
-    
-
 
     const enviar = (e) => {
         e.preventDefault()
@@ -52,11 +45,10 @@ export default function Contato() {
             aviso.telefone = "Digite um telefone válido, com DDD."
         }
 
-
         setErrorForm(aviso)
 
         if (Object.keys(aviso).length > 0) {
-            // leva o foco ao primeiro campo com erro
+
             ;(aviso.nome ? refNome : refTelefone).current?.focus()
             return
         }
@@ -75,16 +67,11 @@ export default function Contato() {
         window.open( `https://wa.me/${contato.whatsapp}?text=${encodeURIComponent(texto) }`, "_blank", "noopener")
     }
 
-
-
     const periodos = [
         { tempo: "Manhã" },
         { tempo: "Tarde" },
         { tempo: "Qualquer horário" }
     ];
-    /*const alternarPeriodo = (per) => setPeriod((datual) => datual.includes(per) ? datual.filter((e)=> e !== per) : [ ...datual, per])*/
-
-
 
     const infos = [
         {
@@ -132,7 +119,6 @@ export default function Contato() {
                 </p>
             </div>
 
-            {/* CONTATOS */}
             <div className="mt-12 flex flex-col gap-6 lg:flex-row">
                 <div
                     ref={refContatos}
@@ -168,7 +154,6 @@ export default function Contato() {
                 />
             </div>
 
-            {/* FORMULÁRIO */}
             <div id="agendar" className="mt-5 flex flex-col gap-6 scroll-mt-28 lg:flex-row lg:items-start">
                 <Imagem
                     imagem={imagens.avaliacaoForm}
@@ -258,7 +243,7 @@ export default function Contato() {
                                     {erroForm.telefone}
                                 </p>
                             )}
-                        {/* SERVIÇOS */}
+
                         <fieldset className="mt-6 flex min-w-0 flex-wrap gap-2">
                             <legend className="mb-2 p-0 text-[11px] font-medium uppercase tracking-[0.2em] text-texto/70">
                                 Qual serviço deseja?
@@ -278,7 +263,6 @@ export default function Contato() {
                             ))}
                         </fieldset>
 
-                        {/* PERÍODO */}
                         <fieldset className="mt-6 flex min-w-0 flex-wrap gap-2">
                             <legend className="mb-2 p-0 text-[11px] font-medium uppercase tracking-[0.2em] text-texto/70">
                                 Melhor período
@@ -298,7 +282,6 @@ export default function Contato() {
                                 </label>
                             ))}
                         </fieldset>
-                       
 
                         {demo.ativo && (
                             <p className="mt-6 rounded-lg border border-destaque/30 bg-fundo px-4 py-3 text-xs leading-relaxed text-texto/80">
@@ -332,4 +315,4 @@ export default function Contato() {
             <PoliticaPrivacidade aberto={privacidadeAberta} onFechar={() => setPrivacidadeAberta(false)} />
         </section>
     )
-}   
+}

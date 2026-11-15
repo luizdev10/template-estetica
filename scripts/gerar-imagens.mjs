@@ -1,5 +1,5 @@
-// Gera versões responsivas (WebP) das imagens de imagens-originais/ em public/imagens/.
-// Uso: npm run imagens
+
+
 import sharp from 'sharp'
 import { readdirSync, mkdirSync } from 'node:fs'
 import { join, parse } from 'node:path'

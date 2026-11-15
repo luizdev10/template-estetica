@@ -2,8 +2,6 @@ import { useEffect, useRef } from "react"
 import { X } from "lucide-react"
 import { clinica, contato, privacidade } from "../site.config.js"
 
-// Política de privacidade em janela (<dialog> nativo: Esc fecha e o foco fica preso).
-// MODELO a ser revisado por profissional (advogado/encarregado de dados).
 export default function PoliticaPrivacidade({ aberto, onFechar }) {
     const ref = useRef(null)
 

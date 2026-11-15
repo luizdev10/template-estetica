@@ -3,7 +3,6 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { demo, clinica, seo, faq } from './src/site.config.js'
 
-// Preenche o <head> do index.html a partir de src/site.config.js
 const htmlDaConfiguracao = () => ({
   name: 'html-da-configuracao',
   transformIndexHtml(html) {

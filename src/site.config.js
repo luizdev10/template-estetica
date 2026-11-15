@@ -1,17 +1,5 @@
-// =====================================================================
-// CONFIGURAÇÃO CENTRAL DO SITE
-// Tudo o que muda de um cliente para outro fica neste arquivo.
-// Este arquivo NÃO importa imagens: use caminhos relativos a public/
-// (ex.: "imagens/hero.webp"). Assim ele também pode ser lido pelo Vite
-// ao gerar o index.html (título, descrição, og:*).
-// Placeholders: procure por TODO.
-// =====================================================================
 
-// ---------------------------------------------------------------------
-// MODO DEMONSTRAÇÃO
-// Para entregar a um cliente: ativo: false (remove a faixa, o aviso do
-// formulário, "Demonstração" do título e o noindex). Veja o README.
-// ---------------------------------------------------------------------
+
 export const demo = {
     ativo: true,
     faixa: "Site de demonstração. Todos os dados são fictícios.",
@@ -20,22 +8,15 @@ export const demo = {
         "Na demonstração, a mensagem é preparada para um número de teste fictício. Nenhum dado é enviado a servidor algum.",
 }
 
-// ---------------------------------------------------------------------
-// CLÍNICA E MARCA
-// ---------------------------------------------------------------------
 export const clinica = {
-    nome: "Nome da Clínica", // TODO: nome real
+    nome: "Nome da Clínica",
     slogan: "Realçar, nunca transformar.",
-    cidade: "Cidade", // TODO
-    uf: "UF", // TODO
-    // Endereço do site publicado, sem barra no final (usado em canonical, og:url e JSON-LD)
-    // TODO: trocar pelo domínio do cliente
+    cidade: "Cidade",
+    uf: "UF",
+
     url: "https://luizdev10.github.io/template-estetica",
 }
 
-// ---------------------------------------------------------------------
-// TOPO (HERO)
-// ---------------------------------------------------------------------
 export const hero = {
     sobretitulo: "Harmonização facial & estética avançada",
     tituloInicio: "A arte de",
@@ -45,12 +26,6 @@ export const hero = {
     imagem: "imagens/hero.webp",
 }
 
-// ---------------------------------------------------------------------
-// IMAGENS
-// Cada imagem tem versões em várias larguras geradas por
-// `npm run imagens` (arquivo-480.webp, arquivo-800.webp, ...).
-// `arquivo` é o caminho sem o sufixo de largura. Origem: veja IMAGENS.md.
-// ---------------------------------------------------------------------
 export const imagens = {
     hero: { arquivo: "imagens/hero", largura: 1856, altura: 2304 },
     profissional: { arquivo: "imagens/profissional", largura: 1856, altura: 2304 },
@@ -68,11 +43,8 @@ export const imagens = {
     },
 }
 
-// ---------------------------------------------------------------------
-// PROFISSIONAL
-// ---------------------------------------------------------------------
 export const profissional = {
-    nome: "Dra. Nome Sobrenome", // TODO
+    nome: "Dra. Nome Sobrenome",
     area: "Harmonização facial",
     imagem: imagens.profissional,
     alt: "Retrato da Dra. Nome Sobrenome, em fundo neutro e luz natural",
@@ -80,14 +52,11 @@ export const profissional = {
     bio: "Cada atendimento começa com uma avaliação detalhada. A proposta é respeitar as proporções do seu rosto e indicar apenas o que faz sentido para você, com calma e sem pressa.",
     frase: "Realçar, nunca transformar.",
 
-    // Registro no conselho profissional (obrigatório na publicidade em saúde).
-    // TODO: preencher com os dados reais. Conselho: CRM, CRO, CRBM, CREFITO, COREN...
     registro: {
-        conselho: "CRO", // TODO: sigla do conselho que se aplica
-        numero: "UF-00000", // TODO: número de inscrição real
+        conselho: "CRO",
+        numero: "UF-00000",
     },
 
-    // Bloco de formação. TODO: preencher com a formação real e comprovável.
     credenciais: [
         { rotulo: "Graduação", valor: "Curso e instituição" },
         { rotulo: "Cursos", valor: "Cursos e especializações" },
@@ -95,14 +64,8 @@ export const profissional = {
     ],
 }
 
-// ---------------------------------------------------------------------
-// CONTATO
-// ---------------------------------------------------------------------
-// Formato 55 + DDD + número, só dígitos. Número FICTÍCIO da demonstração.
-// TODO: trocar pelo WhatsApp do cliente.
 const whatsapp = "5500000000000"
 
-// Gera "(DD) 9XXXX-XXXX" a partir de 55DDDNUMERO (prefixo 55 assumido)
 const formatarWhatsapp = (numero) => {
     const local = numero.replace(/\D/g, "").replace(/^55/, "")
     const ddd = local.slice(0, 2)
@@ -114,15 +77,15 @@ const formatarWhatsapp = (numero) => {
 export const contato = {
     whatsapp,
     whatsappExibicao: formatarWhatsapp(whatsapp),
-    telefone: "", // TODO: telefone fixo, se houver (opcional)
-    instagram: "exemplo.estetica", // TODO
-    email: "contato@exemplo.com", // TODO
+    telefone: "",
+    instagram: "exemplo.estetica",
+    email: "contato@exemplo.com",
     atendimento: "Cidade, UF · com hora marcada",
     horario: "Seg a sáb, 9h às 19h",
-    // Formato schema.org: dias (Mo, Tu, We, Th, Fr, Sa, Su) + horário 24h
+
     horarioSchema: "Mo-Sa 09:00-19:00",
-    endereco: "Rua Exemplo, 123 - Bairro, Cidade - UF", // TODO
-    // Endereço separado em partes, usado nos dados estruturados. TODO
+    endereco: "Rua Exemplo, 123 - Bairro, Cidade - UF",
+
     enderecoPartes: {
         rua: "Rua Exemplo, 123",
         bairro: "Bairro",
@@ -130,9 +93,9 @@ export const contato = {
         uf: "UF",
         cep: "00000-000",
     },
-    // Link do Google Maps. Deixe vazio para gerar a partir do endereço.
+
     mapaLink: "",
-    // Mensagem inicial do botão flutuante
+
     mensagemFlutuante: "Olá! Vi o site e gostaria de saber mais.",
 }
 
@@ -145,22 +108,11 @@ export const menu = [
     { text: "Contato", link: "#contato" },
 ]
 
-// ---------------------------------------------------------------------
-// RÓTULOS
-// ---------------------------------------------------------------------
 export const rotulos = {
-    // "Mais procurado" é uma afirmação que o cliente precisa conseguir
-    // comprovar. Para remover, deixe como null (ou "").
+
     maisProcurado: "Mais procurado",
 }
 
-// ---------------------------------------------------------------------
-// PROCEDIMENTOS
-// `descricao`: texto curto do card. `detalhe`: texto do painel aberto.
-// TODO: todo texto abaixo é MODELO, a ser revisado pelo profissional
-// responsável. Não inclua promessa de resultado.
-// `destaque: true` faz o card maior (apenas um).
-// ---------------------------------------------------------------------
 export const procedimentos = [
     {
         nome: "Toxina botulínica",
@@ -215,13 +167,9 @@ export const procedimentos = [
     },
 ]
 
-// Aviso exibido no painel de procedimentos (modelo)
 export const avisoProcedimentos =
     "Texto modelo, a ser revisado pelo profissional responsável. As informações são gerais e não substituem a avaliação individual."
 
-// ---------------------------------------------------------------------
-// PERGUNTAS FREQUENTES (modelo, a ser revisado pelo profissional)
-// ---------------------------------------------------------------------
 export const faq = {
     titulo: "Perguntas frequentes",
     aviso: "Modelo a ser revisado pelo profissional de saúde responsável.",
@@ -234,7 +182,7 @@ export const faq = {
         {
             pergunta: "Quanto tempo dura o atendimento?",
             resposta:
-                "A duração varia conforme o caso. O tempo estimado é informado na hora do agendamento.", // TODO: confirmar com o responsável
+                "A duração varia conforme o caso. O tempo estimado é informado na hora do agendamento.",
         },
         {
             pergunta: "O que devo levar?",
@@ -254,33 +202,20 @@ export const faq = {
     ],
 }
 
-// ---------------------------------------------------------------------
-// PUBLICIDADE EM SAÚDE
-// ATENÇÃO: a publicidade de procedimentos de saúde tem regras do
-// conselho profissional (CFM, CFO, CFBM, COFFITO etc.). Confira o
-// conteúdo (textos, fotos, termos como "mais procurado") antes de
-// publicar para o público.
-// ---------------------------------------------------------------------
 export const rodape = {
     aviso:
         "Conteúdo informativo. Não substitui consulta, avaliação ou orientação de profissional de saúde. Os resultados variam de pessoa para pessoa.",
 }
 
-// ---------------------------------------------------------------------
-// SEO
-// ---------------------------------------------------------------------
 export const seo = {
-    titulo: "Harmonização Facial e Estética em Cidade, UF", // sem o nome (ele é acrescentado)
+    titulo: "Harmonização Facial e Estética em Cidade, UF",
     descricao:
-        "Clínica de harmonização facial e estética avançada em Cidade, UF. Avaliação individual, com calma e sem pressa.", // TODO: serviço + cidade reais
-    ogImagem: "og-image.jpg", // 1200x630, em public/
+        "Clínica de harmonização facial e estética avançada em Cidade, UF. Avaliação individual, com calma e sem pressa.",
+    ogImagem: "og-image.jpg",
     ogImagemAlt: "Retrato de uma mulher em tons neutros, com luz natural",
-    tipoSchema: "MedicalClinic", // ou "HealthAndBeautyBusiness"
+    tipoSchema: "MedicalClinic",
 }
 
-// ---------------------------------------------------------------------
-// POLÍTICA DE PRIVACIDADE (modelo)
-// ---------------------------------------------------------------------
 export const privacidade = {
     responsavel: "PREENCHER PELO RESPONSÁVEL",
     cnpjCpf: "PREENCHER PELO RESPONSÁVEL",
