@@ -9,7 +9,7 @@ export function useReveal({ threshold = 0.2, rootMargin = "0px 0px -10% 0px" } =
         if (!elemento) return
 
         const prefereMenosMovimento = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        if (prefereMenosMovimento) {
+        if (prefereMenosMovimento || !("IntersectionObserver" in window)) {
             setVisivel(true)
             return
         }
@@ -25,7 +25,15 @@ export function useReveal({ threshold = 0.2, rootMargin = "0px 0px -10% 0px" } =
         )
 
         observador.observe(elemento)
-        return () => observador.disconnect()
+
+        const reserva = setTimeout(() => {
+            if (elemento.getBoundingClientRect().top < window.innerHeight) setVisivel(true)
+        }, 2500)
+
+        return () => {
+            clearTimeout(reserva)
+            observador.disconnect()
+        }
     }, [threshold, rootMargin])
 
     return [ref, visivel]

@@ -14,7 +14,8 @@ export default function Home() {
                 fetchPriority="high"
                 className="absolute inset-0 h-full w-full origin-center object-cover object-[35%_30%] animate-zoom-suave motion-reduce:animate-none"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/10" />
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/50 to-black/10" />
+            <div className="absolute inset-0 bg-linear-to-r from-black/55 via-black/25 to-transparent lg:from-black/65" />
 
             <svg className="pointer-events-none absolute inset-0 h-full w-full opacity-[0.18] mix-blend-overlay motion-reduce:hidden" aria-hidden="true">
                 <filter id="graoHero">
