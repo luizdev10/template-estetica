@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { menu, clinica } from "../site.config.js"
+import { menu, clinica, demo } from "../site.config.js"
 import { useScrollHeader } from "../hooks/useScrollHeader.js"
 
 export default function Header() {
@@ -36,7 +36,7 @@ export default function Header() {
     return (
         <>
             <header
-                className={`fixed inset-x-0 top-0 z-50 border-b transition-colors duration-500 motion-reduce:transition-none ${estilo}`}
+                className={`fixed inset-x-0 ${demo.ativo && !rolado ? "top-7" : "top-0"} z-50 border-b transition-colors duration-500 motion-reduce:transition-none ${estilo}`}
             >
                 <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 lg:grid lg:h-20 lg:grid-cols-[1fr_auto_1fr] lg:px-8">
                     {/* esquerda (desktop) */}
@@ -106,7 +106,7 @@ export default function Header() {
                 backdrop-blur no pai quebraria o "fixed") */}
             <nav
                 aria-hidden={!aberto}
-                className={`fixed inset-x-0 top-16 z-40 border-b border-borda bg-fundo px-5 pb-6 pt-2 text-texto shadow-lg transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none lg:hidden ${
+                className={`fixed inset-x-0 ${demo.ativo && !rolado ? "top-[calc(4rem+1.75rem)]" : "top-16"} z-40 border-b border-borda bg-fundo px-5 pb-6 pt-2 text-texto shadow-lg transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none lg:hidden ${
                     aberto ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"
                 }`}
             >

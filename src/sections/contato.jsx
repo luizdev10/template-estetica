@@ -1,4 +1,4 @@
-import { contato, procedimentos, imagens } from "../site.config.js";
+import { contato, procedimentos, imagens, demo } from "../site.config.js";
 import Imagem from "../lib/imagem.jsx";
 import { useState } from "react";
 import { useReveal } from "../hooks/useReveal.js";
@@ -271,6 +271,12 @@ export default function Contato() {
                             ))}
                         </fieldset>
                        
+
+                        {demo.ativo && (
+                            <p className="mt-6 rounded-lg border border-destaque/30 bg-fundo px-4 py-3 text-xs leading-relaxed text-texto/80">
+                                {demo.avisoFormulario}
+                            </p>
+                        )}
 
                         <button
                             type="submit"
