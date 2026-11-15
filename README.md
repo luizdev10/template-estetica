@@ -1,6 +1,8 @@
 # Template Estética
 
-Template de site para clínicas de estética e harmonização facial, feito com React 18, Vite e Tailwind CSS v4. Página única (sem rotas), com seções de início, procedimentos, sobre, localização, contato (com formulário de agendamento) e um botão flutuante de WhatsApp.
+Template de site para clínicas de estética e harmonização facial, feito com React 18, Vite e Tailwind CSS v4. É uma página única (sem rotas) com início, procedimentos, sobre, perguntas frequentes, localização e contato, com formulário que monta uma mensagem de WhatsApp (nenhum dado vai a servidor).
+
+Esta versão é uma **demonstração**: todos os dados são fictícios e o site pede aos buscadores que não o indexem.
 
 ## Como rodar
 
@@ -9,46 +11,86 @@ npm install
 npm run dev
 ```
 
-Isso abre o site em modo desenvolvimento (com recarregamento automático). Para gerar a versão de produção:
+Para gerar a versão de produção (pasta `dist/`) e visualizá-la:
 
 ```bash
 npm run build
+npm run preview
 ```
 
-Os arquivos finais vão para a pasta `dist/`.
+## Como personalizar
 
-## Como personalizar para um cliente
+Quase tudo vem de **`src/site.config.js`**. Cada bloco explica o que controla:
 
-Quase todo o conteúdo do site vem de `src/config/site.js`. É só editar os valores — nada de mexer em JSX para trocar texto.
+- `demo`: liga e desliga o modo demonstração (faixa no topo, aviso no formulário, "Demonstração" no título e `noindex`).
+- `clinica`: nome, slogan, cidade, UF e endereço do site publicado (`url`).
+- `hero`: textos do topo.
+- `profissional`: nome, área, bio, formação (`credenciais`) e `registro` no conselho (sigla e número).
+- `contato`: WhatsApp (formato `55` + DDD + número, só dígitos), Instagram, e-mail, endereço, horário e link do mapa.
+- `rotulos.maisProcurado`: deixe `null` para remover o rótulo "Mais procurado".
+- `procedimentos`: nome, descrição curta, detalhe, imagem e texto alternativo de cada card.
+- `faq`: perguntas e respostas (também geram os dados estruturados FAQPage).
+- `rodape`, `seo` e `privacidade`: aviso informativo, título e descrição para buscadores e dados da política de privacidade.
 
-- **`profissional`** — nome, `registro` (CRO, CRBM, CREFITO... ou deixe vazio se não tiver), `area` de atuação, foto, posição de enquadramento da foto (`posicao`), `bio`, `frase` de destaque e a lista de `credenciais` (formação, cursos, atendimento).
-- **`clinica`** — nome, telefone e endereço básicos da clínica (usados no cabeçalho).
-- **`contato`** — WhatsApp (`whatsapp`, só números, com DDI; `whatsappExibicao`, formatado), Instagram, e-mail, texto de atendimento, horário de funcionamento e `endereco` (usado na seção de localização e no mapa).
-- **`menu`** — itens do menu de navegação do cabeçalho.
-- **`procedimentos`** — lista de procedimentos exibidos na grade (nome, descrição, imagem, texto alternativo da imagem e, opcionalmente, `posicao` do enquadramento).
+O título da página, as metatags, o Open Graph e o JSON-LD (clínica e perguntas frequentes) são gerados a partir dessa configuração durante o build, em `vite.config.js`.
 
-### Fotos
+### Imagens
 
-Troque as imagens em `src/assets/images/`. Prefira o formato `.webp` (mais leve) e mantenha os mesmos nomes de arquivo, ou atualize os `import` no topo de `src/config/site.js` se renomear algum arquivo.
+1. Coloque as fotos originais (WebP) em `imagens-originais/`.
+2. Rode `npm run imagens` para gerar as versões de 480, 800, 1200 e 1600 px em `public/imagens/`.
+3. Declare a imagem em `src/site.config.js` (`arquivo`, `largura`, `altura`) e escreva o texto alternativo.
+4. Registre a origem e a licença de cada foto em `IMAGENS.md`.
 
-### Cores
+Troque também `public/og-image.jpg` (1200x630) e `public/favicon.svg`.
 
-Os tokens de cor e fonte ficam em `src/temas/paletas.css`, dentro do bloco `@theme`: `--color-fundo`, `--color-texto`, `--color-suave`, `--color-borda`, `--color-destaque`, `--color-destaque-escuro`, `--color-amarelo`, além de `--font-display` e `--font-sans`. Troque os valores ali — o resto do site usa essas variáveis através das classes do Tailwind (`bg-fundo`, `text-destaque` etc.), então a cor muda em todo lugar de uma vez.
+### Cores e fontes
 
-### Título e metatags (SEO)
+Os tokens ficam em `src/temas/paletas.css`, no bloco `@theme`.
 
-Em `index.html`, logo abaixo do comentário `<!-- TROCAR POR CLIENTE: title, description, og:* -->`, troque o `<title>`, a `<meta name="description">` e as tags `og:*` (título, descrição e imagem usados quando o link é compartilhado em redes sociais). Depois do deploy, troque o `content` da tag `og:image` para a URL completa (`https://seu-dominio/og-image.jpg`), já que redes sociais não aceitam caminho relativo.
+## Textos de saúde e privacidade
 
-## Checklist antes de publicar
+Os textos de procedimentos, perguntas frequentes e a política de privacidade são **modelos genéricos, sem promessa de resultado**, e precisam ser revisados pelo profissional de saúde responsável (e, no caso da privacidade, por profissional habilitado). A publicidade de procedimentos de saúde segue regras do conselho profissional (CFM, CFO, CFBM, COFFITO etc.). Confira textos, fotos e rótulos antes de publicar.
 
-- [ ] Trocar todos os textos de exemplo (nome da clínica, profissional, procedimentos, endereço, etc.)
-- [ ] Buscar no projeto por `exemplo` e `00000` para achar qualquer placeholder esquecido
-- [ ] Testar o botão de WhatsApp (flutuante e o do formulário) — confirmar que abre a conversa certa
-- [ ] Testar o mapa da seção de localização e o link "Abrir no Google Maps"
-- [ ] Abrir o site no celular e conferir o layout (menu, formulário, mapa)
-- [ ] Trocar o título, a descrição e as metatags `og:*` em `index.html`
-- [ ] Trocar `public/og-image.jpg` e `public/favicon.svg` pelos do cliente
+## Antes de entregar a um cliente
+
+- [ ] Trocar todos os dados de exemplo em `src/site.config.js` (nome, profissional, endereço, WhatsApp, Instagram, e-mail, horário, cidade e UF).
+- [ ] Preencher o registro no conselho profissional e a formação.
+- [ ] Usar somente fotos autorizadas e preencher `IMAGENS.md`.
+- [ ] Conferir as regras de publicidade do conselho profissional (incluindo o rótulo "Mais procurado", que o cliente precisa poder comprovar, ou remover com `rotulos.maisProcurado: null`).
+- [ ] Revisar com o profissional os textos de procedimentos e as perguntas frequentes.
+- [ ] Preencher e revisar a política de privacidade (campos "PREENCHER PELO RESPONSÁVEL" em `privacidade`).
+- [ ] Remover o aviso de demonstração e o `noindex`: em `src/site.config.js`, trocar `demo.ativo` para `false`.
+- [ ] Trocar `clinica.url` pelo domínio real e atualizar `public/robots.txt` e `public/sitemap.xml`.
+- [ ] Testar o WhatsApp, o formulário, o mapa e o site no celular.
+- [ ] Buscar no projeto por `exemplo`, `00000`, `PREENCHER` e `Cidade`.
 
 ## Publicar no GitHub Pages
 
-Em `vite.config.js`, o campo `base` precisa ser o nome do repositório no GitHub (ex.: `/nome-do-repositorio/`), senão os arquivos (CSS, imagens) não carregam depois do deploy. Com o repositório conectado ao GitHub e um workflow de deploy configurado, basta dar `push` na branch principal para publicar automaticamente.
+O deploy é automático: cada `push` na branch `main` roda `.github/workflows/deploy.yml`. Em *Settings > Pages*, a fonte precisa estar como *GitHub Actions*.
+
+O `base` do Vite (`vite.config.js`, constante `BASE`) precisa ser igual ao nome do repositório, em minúsculas e entre barras, por exemplo `/template-estetica/`.
+
+## Renomear o repositório para minúsculas
+
+O site tem um único endereço (`/template-estetica/`), sem rotas internas, então recarregar a página não gera erro 404.
+
+```bash
+gh repo rename template-estetica
+git remote set-url origin https://github.com/luizdev10/template-estetica.git
+git remote -v
+```
+
+Depois do rename, publique as alterações de `base`, `robots.txt`, `sitemap.xml` e `clinica.url`, que já apontam para o endereço novo:
+
+```bash
+git push origin main
+```
+
+Conferência:
+
+```bash
+npm run build
+npm run preview -- --base /template-estetica/
+```
+
+Abra `http://localhost:4173/template-estetica/`, recarregue a página e confirme que não há 404. Depois do deploy, abra `https://luizdev10.github.io/template-estetica/`, recarregue e abra a aba *Network* para conferir que CSS, JavaScript e imagens carregam com status 200. O endereço antigo (`/Template-Estetica/`) deixa de funcionar, então atualize links que apontem para ele.

@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { demo, clinica, seo, faq, contato, profissional } from './src/site.config.js'
 
-const BASE = '/Template-Estetica/'
+const BASE = '/template-estetica/'
 
 const json = (o) => JSON.stringify(o).replace(/</g, '\u003c')
 const attr = (t) => t.replace(/&/g, '&amp;').replace(/"/g, '&quot;')

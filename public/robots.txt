@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://luizdev10.github.io/Template-Estetica/sitemap.xml
+Sitemap: https://luizdev10.github.io/template-estetica/sitemap.xml
