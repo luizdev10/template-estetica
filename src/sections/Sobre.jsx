@@ -18,8 +18,7 @@ export default function Sobre() {
                     <Imagem
                         imagem={profissional.imagem}
                         alt={profissional.alt}
-                        loading="lazy"
-                        decoding="async"
+                        sizes="(min-width: 768px) 420px, 100vw"
                         style={{ objectPosition: profissional.posicao }}
                         className={`h-full w-full object-cover transition-transform duration-700 ease-out hover:scale-105 ${
                             visivel ? "animate-revelar-foto motion-reduce:animate-none" : "scale-110 [clip-path:inset(0_0_100%_0)]"

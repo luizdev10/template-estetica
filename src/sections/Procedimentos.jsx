@@ -94,8 +94,7 @@ function CardProcedimento({ item, destaque, visivel, atraso, idGrao, onClick }) 
             <Imagem
                 imagem={item.imagem}
                 alt=""
-                loading="lazy"
-                decoding="async"
+                sizes={destaque ? "(min-width: 1280px) 384px, (min-width: 1024px) 320px, 100vw" : "(min-width: 768px) 33vw, 50vw"}
                 style={{ objectPosition: item.posicao, animationDelay: visivel ? `${atraso}ms` : undefined }}
                 className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 ${
                     visivel ? "animate-revelar-foto motion-reduce:animate-none" : "scale-110 [clip-path:inset(0_0_100%_0)]"
@@ -154,6 +153,7 @@ function ModalProcedimento({ item, onFechar }) {
                 <Imagem
                     imagem={item.imagem}
                     alt={item.alt}
+                    sizes="448px"
                     style={{ objectPosition: item.posicao }}
                     className="aspect-[3/2] w-full object-cover"
                 />

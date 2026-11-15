@@ -163,7 +163,7 @@ export default function Contato() {
                 <Imagem
                     imagem={imagens.contatoDestaque}
                     alt={imagens.contatoDestaque.alt}
-                    loading="lazy"
+                    sizes="320px"
                     className="hidden rounded-2xl object-cover lg:block lg:w-72 lg:shrink-0 xl:w-80"
                 />
             </div>
@@ -173,7 +173,7 @@ export default function Contato() {
                 <Imagem
                     imagem={imagens.avaliacaoForm}
                     alt={imagens.avaliacaoForm.alt}
-                    loading="lazy"
+                    sizes="320px"
                     className="hidden rounded-2xl object-cover lg:sticky lg:top-24 lg:block lg:aspect-[3/4] lg:w-72 lg:shrink-0 xl:w-80"
                 />
 
