@@ -2,7 +2,6 @@ import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import WhatsappFlutuante from "./components/WhatsappFlutuante.jsx";
 import FaixaDemo from "./components/FaixaDemo.jsx";
-import Seo from "./components/Seo.jsx";
 import Home from "./sections/home.jsx";
 import Proced from "./sections/Procedimentos.jsx";
 import Sobre from "./sections/Sobre.jsx";
@@ -12,8 +11,7 @@ import Contato from "./sections/contato.jsx";
 function App() {
   return (
     <>
-    <Seo />
-    <FaixaDemo />
+        <FaixaDemo />
     <Header />
     <Home />
     <Proced />

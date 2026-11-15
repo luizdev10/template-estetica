@@ -208,9 +208,9 @@ export const rodape = {
 }
 
 export const seo = {
-    titulo: "Harmonização Facial e Estética em Cidade, UF",
+    titulo: `Harmonização Facial e Estética em ${clinica.cidade}, ${clinica.uf}`,
     descricao:
-        "Clínica de harmonização facial e estética avançada em Cidade, UF. Avaliação individual, com calma e sem pressa.",
+        `Clínica de harmonização facial e estética avançada em ${clinica.cidade}, ${clinica.uf}. Avaliação individual, com calma e sem pressa.`,
     ogImagem: "og-image.jpg",
     ogImagemAlt: "Retrato de uma mulher em tons neutros, com luz natural",
     tipoSchema: "MedicalClinic",
